@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarpenterTable", "CarpenterTable.csproj", "{BCF2E641-B027-43A1-9B07-1B08A29F5816}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarpenterTable", "CarpenterTable\CarpenterTable.csproj", "{BCF2E641-B027-43A1-9B07-1B08A29F5816}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

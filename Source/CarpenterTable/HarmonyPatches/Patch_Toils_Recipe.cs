@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Reflection;
 using System.Reflection.Emit;
 using UnityEngine;
 using Verse;
 using Verse.AI;
 using RimWorld;
-using Harmony;
+using HarmonyLib;
 
 namespace CarpenterTable
 {
@@ -29,8 +27,7 @@ namespace CarpenterTable
                 {
                     // If the thing being worked on is an unfinished building, check for construction failure
                     var actor = __result.actor;
-                    var unfinishedBuilding = actor.CurJob.GetTarget(TargetIndex.B).Thing as UnfinishedBuilding;
-                    if (unfinishedBuilding != null)
+                    if (actor.CurJob.GetTarget(TargetIndex.B).Thing is UnfinishedBuilding unfinishedBuilding)
                     {
                         var successChance = actor.GetStatValue(StatDefOf.ConstructSuccessChance);
                         var constructionSpeed = actor.GetStatValue(StatDefOf.ConstructionSpeed);
@@ -61,9 +58,9 @@ namespace CarpenterTable
                 var instructionList = instructions.ToList();
 
                 toilInstruction = instructionList.First(i => i.operand is FieldInfo fi && fi.Name == "toil");
-                bool listExists = false;
+                var listExists = false;
 
-                for (int i = 0; i < instructionList.Count; i++)
+                for (var i = 0; i < instructionList.Count; i++)
                 {
                     var instruction = instructionList[i];
 
@@ -79,14 +76,16 @@ namespace CarpenterTable
                             if (fifthInstructionAhead.opcode == OpCodes.Callvirt)
                             {
                                 // Add calls to the auto-deconstruct helper method before each call for EndCurrentJob
-                                if (fifthInstructionAhead.operand == AccessTools.Method(typeof(Pawn_JobTracker), nameof(Pawn_JobTracker.EndCurrentJob)))
+                                if ((MethodInfo)fifthInstructionAhead.operand == AccessTools.Method(typeof(Pawn_JobTracker), nameof(Pawn_JobTracker.EndCurrentJob)))
                                 {
                                     foreach (CodeInstruction helperInstruction in TranspilerHelperAutoDeconstructCallInstructions(false))
+                                    {
                                         yield return helperInstruction;
+                                    }
                                 }
 
                                 // Add calls to the 'don't count iteration' helper method before each call for Notify_IterationCompleted
-                                else if (fifthInstructionAhead.operand == AccessTools.Method(typeof(Bill), nameof(Bill.Notify_IterationCompleted)))
+                                else if ((MethodInfo)fifthInstructionAhead.operand == AccessTools.Method(typeof(Bill), nameof(Bill.Notify_IterationCompleted)))
                                 {
                                     yield return new CodeInstruction(OpCodes.Ldarg_0); // this
                                     yield return toilInstruction; // this.toil
@@ -97,11 +96,14 @@ namespace CarpenterTable
                         }
 
                         // Add call to the auto-deconstruct helper method if the current line is 'curJob.count = 99999' (i.e. if product would normally be carried to a stockpile)
-                        if (instruction.opcode == OpCodes.Stfld && instruction.operand == AccessTools.Field(typeof(Job), nameof(Job.count)) && (int)instructionList[i - 1].operand == 99999)
+                        if (instruction.opcode == OpCodes.Stfld && (FieldInfo)instruction.operand == AccessTools.Field(typeof(Job), nameof(Job.count)) && (int)instructionList[i - 1].operand == 99999)
                         {
                             yield return instruction;
                             foreach (CodeInstruction helperInstruction in TranspilerHelperAutoDeconstructCallInstructions(true))
+                            {
                                 yield return helperInstruction;
+                            }
+
                             instruction = new CodeInstruction(OpCodes.Nop);
                         }
                     }
@@ -109,7 +111,9 @@ namespace CarpenterTable
                     yield return instruction;
 
                     if (!listExists && instruction.opcode == OpCodes.Stloc_S && ((LocalBuilder)instruction.operand).LocalIndex == 6)
+                    {
                         listExists = true;
+                    }
                 }
             }
 
@@ -131,14 +135,18 @@ namespace CarpenterTable
                     var product = products.First();
                     var productionBill = (Bill_Production)curJob.bill;
                     if (productionBill.repeatMode == BillRepeatModeDefOf.RepeatCount && !ProductMeetsQualityRequirement(product, productionBill.qualityRange))
+                    {
                         productionBill.repeatCount++;
+                    }
                 }
             }
 
             public static void TranspilerHelper_AutoDeconstruct(Toil resultToil, List<Thing> products, bool endCurrent)
             {
                 if (!CarpenterTablesSettings.deconstructInadequateProducts)
+                {
                     return;
+                }
 
                 var actor = resultToil.actor;
                 var curJob = actor.CurJob;
@@ -154,11 +162,17 @@ namespace CarpenterTable
                     {
                         var designationManager = actor.Map.designationManager;
                         if (actor.carryTracker.CarriedThing != null)
+                        {
                             actor.carryTracker.TryDropCarriedThing(actor.Position, ThingPlaceMode.Near, out product);
+                        }
+
                         designationManager.RemoveAllDesignationsOn(product); // Prevent double designation errors
                         designationManager.AddDesignation(new Designation(product, DesignationDefOf.Deconstruct));
                         if (endCurrent)
+                        {
                             actor.jobs.EndCurrentJob(JobCondition.Succeeded);
+                        }
+
                         actor.jobs.jobQueue.EnqueueFirst(new Job(JobDefOf.Deconstruct, product), JobTag.MiscWork);
                     }
                 }

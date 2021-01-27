@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Reflection;
-using UnityEngine;
 using Verse;
 using Verse.AI;
-using RimWorld;
-using Harmony;
+using HarmonyLib;
 
 namespace CarpenterTable
 {
@@ -18,17 +13,23 @@ namespace CarpenterTable
 
         static HarmonyPatches()
         {
-            var h = HarmonyInstance.Create("XeoNovaDan.CarpenterTable");
-            //HarmonyInstance.DEBUG = true;
+            var h = new Harmony("XeoNovaDan.CarpenterTable");
+            //Harmony.DEBUG = true;
 
             // Automatic patches
             h.PatchAll();
 
             // Manual patches
             // Patch the initAction for Toils_Recipe.FinishRecipeAndStartStoringProduct
-            h.Patch(typeof(Toils_Recipe).GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance).First(t => t.Name.Contains("FinishRecipeAndStartStoringProduct")).
-                GetMethods(BindingFlags.NonPublic | BindingFlags.Instance).MaxBy(mi => mi.GetMethodBody()?.GetILAsByteArray().Length ?? -1),
-                transpiler: new HarmonyMethod(typeof(Patch_Toils_Recipe.ManualPatch_FinishRecipeAndStartStoringProduct_InitAction), "Transpiler"));
+            var nestedTypes = typeof(Toils_Recipe).GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Instance);
+            var first = nestedTypes.FirstOrDefault(t => t.Name.Contains("FinishRecipeAndStartStoringProduct"));
+            if (first == null)
+            {
+                return;
+            }
+            var methods = first.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance);
+            var method = methods.MaxBy(mi => mi.GetMethodBody()?.GetILAsByteArray().Length ?? -1);
+            h.Patch(method, transpiler: new HarmonyMethod(typeof(Patch_Toils_Recipe.ManualPatch_FinishRecipeAndStartStoringProduct_InitAction), "Transpiler"));
 
         }
 

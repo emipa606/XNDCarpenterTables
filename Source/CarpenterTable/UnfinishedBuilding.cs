@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
-using Verse;
-using RimWorld;
+﻿using Verse;
 
 namespace CarpenterTable
 {
@@ -19,7 +13,7 @@ namespace CarpenterTable
             {
                 foreach (Thing ingredient in ingredients)
                 {
-                    int ingredientCountLeft = GenMath.RoundRandom(ingredient.stackCount * 0.5f);
+                    var ingredientCountLeft = GenMath.RoundRandom(ingredient.stackCount * 0.5f);
                     if (ingredientCountLeft > 0)
                     {
                         ingredient.stackCount = ingredientCountLeft;

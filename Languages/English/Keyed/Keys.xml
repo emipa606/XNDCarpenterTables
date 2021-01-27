@@ -1,12 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
-    <!-- Settings -->
-    <CarpenterTables.SettingsCategory>Carpenter Tables</CarpenterTables.SettingsCategory>
-
-    <CarpenterTables.DeconstructInadequateProducts>Automatically deconstruct assembled low-quality furniture</CarpenterTables.DeconstructInadequateProducts>
-    <CarpenterTables.DeconstructInadequateProducts_ToolTip>If this setting is enabled, constructors will automatically deconstruct any furniture assembled at a carpenter's table that doesn't meet the bill's quality requirements.</CarpenterTables.DeconstructInadequateProducts_ToolTip>
-
-    <CarpenterTables.RestrictFurnitureConstruction>Restrict furniture construction</CarpenterTables.RestrictFurnitureConstruction>
-    <CarpenterTables.RestrictFurnitureConstruction_ToolTip>If this setting is enabled, furniture will only be producible at carpenter tables.</CarpenterTables.RestrictFurnitureConstruction_ToolTip>
-
+  <!-- Settings -->
+  <CarpenterTables.SettingsCategory>Carpenter Tables</CarpenterTables.SettingsCategory>
+  <CarpenterTables.DeconstructInadequateProducts>Automatically deconstruct assembled low-quality furniture</CarpenterTables.DeconstructInadequateProducts>
+  <CarpenterTables.DeconstructInadequateProducts_ToolTip>If this setting is enabled, constructors will automatically deconstruct any furniture assembled at a carpenter's table that doesn't meet the bill's quality requirements.</CarpenterTables.DeconstructInadequateProducts_ToolTip>
+  <CarpenterTables.RestrictFurnitureConstruction>Restrict furniture construction</CarpenterTables.RestrictFurnitureConstruction>
+  <CarpenterTables.RestrictFurnitureConstruction_ToolTip>If this setting is enabled, furniture will only be producible at carpenter tables.</CarpenterTables.RestrictFurnitureConstruction_ToolTip>
 </LanguageData>

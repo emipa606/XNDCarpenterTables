@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using UnityEngine;
 using Verse;
 using RimWorld;
 
@@ -42,9 +39,11 @@ namespace CarpenterTable
                 // Add construction skill requirement if there is any
                 if (buildingDef.constructionSkillPrerequisite > 0)
                 {
-                    var constructionRequirement = new SkillRequirement();
-                    constructionRequirement.skill = SkillDefOf.Construction;
-                    constructionRequirement.minLevel = buildingDef.constructionSkillPrerequisite;
+                    var constructionRequirement = new SkillRequirement
+                    {
+                        skill = SkillDefOf.Construction,
+                        minLevel = buildingDef.constructionSkillPrerequisite
+                    };
                     newRecipe.skillRequirements = new List<SkillRequirement>() { constructionRequirement };
                 }
 
@@ -87,7 +86,9 @@ namespace CarpenterTable
         {
             // If requirements are undefined, return null
             if (minTechLevel == TechLevel.Undefined && maxTechLevel == TechLevel.Undefined)
+            {
                 return null;
+            }
 
             var resultList = new List<string>();
 
@@ -96,9 +97,13 @@ namespace CarpenterTable
             {
                 if (faction.techLevel >= minTechLevel && faction.techLevel <= maxTechLevel)
                 {
-                    foreach (string tag in faction.recipePrerequisiteTags)
+                    foreach (var tag in faction.recipePrerequisiteTags)
+                    {
                         if (!resultList.Contains(tag))
+                        {
                             resultList.Add(tag);
+                        }
+                    }
                 }
             }
 

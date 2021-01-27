@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Reflection;
 using System.Reflection.Emit;
-using UnityEngine;
 using Verse;
-using Verse.AI;
 using RimWorld;
-using Harmony;
+using HarmonyLib;
 
 namespace CarpenterTable
 {
@@ -23,15 +19,15 @@ namespace CarpenterTable
 
             public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
             {
-                List<CodeInstruction> instructionList = instructions.ToList();
-                bool done = false;
+                var instructionList = instructions.ToList();
+                var done = false;
 
-                for (int i = 0; i < instructionList.Count; i++)
+                for (var i = 0; i < instructionList.Count; i++)
                 {
                     CodeInstruction instruction = instructionList[i];
 
                     // Look for 'listing_Standard.EndSection(listing_Standard2)'
-                    if (!done && instruction.opcode == OpCodes.Callvirt && instruction.operand == AccessTools.Method(typeof(Listing_Standard), nameof(Listing_Standard.EndSection)))
+                    if (!done && instruction.opcode == OpCodes.Callvirt && (MethodInfo)instruction.operand == AccessTools.Method(typeof(Listing_Standard), nameof(Listing_Standard.EndSection)))
                     {
                         yield return instruction;
                         yield return new CodeInstruction(OpCodes.Ldarg_0); // this

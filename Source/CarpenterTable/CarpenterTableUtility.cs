@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
-using Verse;
-using RimWorld;
+﻿using Verse;
 
 namespace CarpenterTable
 {
@@ -18,7 +12,9 @@ namespace CarpenterTable
             {
                 // Not minifiable
                 if (!tDef.Minifiable)
+                {
                     return false;
+                }
 
                 var designationCategory = def.designationCategory;
                 return

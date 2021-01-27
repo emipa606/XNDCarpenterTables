@@ -1,10 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Manifest>
-    <identifier>CarpenterTables</identifier>
-    <version>1.2.1</version>
-    <loadAfter>
-        <li>MinifyEverything</li>
-    </loadAfter>
-    <manifestUri>https://rawgit.com/XeoNovaDan/CarpenterTables/master/About/Manifest.xml</manifestUri>
-    <downloadUri>https://github.com/XeoNovaDan/CarpenterTables/releases</downloadUri>
+  <identifier>XNDCarpenterTables</identifier>
+  <version>1.0.1.0</version>
+  <dependencies />
+  <incompatibleWith />
+  <loadBefore />
+  <loadAfter />
+  <manifestUri>https://raw.githubusercontent.com/emipa606/XNDCarpenterTables/master/About/Manifest.xml</manifestUri>
+  <downloadUri>https://github.com/emipa606/XNDCarpenterTables/releases</downloadUri>
 </Manifest>
+
+

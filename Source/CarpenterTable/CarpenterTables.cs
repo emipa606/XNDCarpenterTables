@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 using Verse;
-using RimWorld;
 
 namespace CarpenterTable
 {
@@ -18,7 +13,10 @@ namespace CarpenterTable
             GetSettings<CarpenterTablesSettings>();
         }
 
-        public override string SettingsCategory() => "CarpenterTables.SettingsCategory".Translate();
+        public override string SettingsCategory()
+        {
+            return "CarpenterTables.SettingsCategory".Translate();
+        }
 
         public override void DoSettingsWindowContents(Rect inRect)
         {

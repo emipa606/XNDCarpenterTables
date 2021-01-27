@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
-using Verse;
+﻿using Verse;
 using RimWorld;
-using Harmony;
+using HarmonyLib;
 
 namespace CarpenterTable
 {
@@ -22,7 +17,9 @@ namespace CarpenterTable
             {
                 // If the 'restrict furniture construction' setting is enabled, god mode is not enabled and the PlacingDef is furniture, hide the designator
                 if (CarpenterTablesSettings.restrictFurnitureConstruction && !DebugSettings.godMode && __instance.PlacingDef.IsFurniture())
+                {
                     __result = false;
+                }
             }
 
         }
