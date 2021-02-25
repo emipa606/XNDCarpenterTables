@@ -11,14 +11,16 @@ namespace CarpenterTable
             // If the 'construction' of the unfinished building is 'failed', treat it like cancelling the unfinished thing but with construction failure percentages
             if (mode == DestroyMode.FailConstruction)
             {
-                foreach (Thing ingredient in ingredients)
+                foreach (var ingredient in ingredients)
                 {
                     var ingredientCountLeft = GenMath.RoundRandom(ingredient.stackCount * 0.5f);
-                    if (ingredientCountLeft > 0)
+                    if (ingredientCountLeft <= 0)
                     {
-                        ingredient.stackCount = ingredientCountLeft;
-                        GenPlace.TryPlaceThing(ingredient, Position, Map, ThingPlaceMode.Near);
+                        continue;
                     }
+
+                    ingredient.stackCount = ingredientCountLeft;
+                    GenPlace.TryPlaceThing(ingredient, Position, Map, ThingPlaceMode.Near);
                 }
                 ingredients.Clear();
             }

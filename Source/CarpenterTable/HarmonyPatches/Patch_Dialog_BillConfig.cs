@@ -1,17 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Reflection.Emit;
-using Verse;
-using RimWorld;
-using HarmonyLib;
-
-namespace CarpenterTable
+﻿namespace CarpenterTable
 {
-
     public static class Patch_Dialog_BillConfig
     {
-
         //[HarmonyPatch(typeof(Dialog_BillConfig))]
         //[HarmonyPatch(nameof(Dialog_BillConfig.DoWindowContents))]
         //public static class Patch_DoWindowContents
@@ -53,7 +43,5 @@ namespace CarpenterTable
         //    }
 
         //}
-
     }
-
 }

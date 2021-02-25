@@ -3,12 +3,10 @@ using Verse;
 
 namespace CarpenterTable
 {
-
     public class CarpenterTablesSettings : ModSettings
     {
-
         public static bool deconstructInadequateProducts = true;
-        public static bool restrictFurnitureConstruction = false;
+        public static bool restrictFurnitureConstruction;
 
         public void DoWindowContents(Rect wrect)
         {
@@ -21,24 +19,23 @@ namespace CarpenterTable
 
             // Automatic deconstruction of low-quality furniture
             options.Gap();
-            options.CheckboxLabeled("CarpenterTables.DeconstructInadequateProducts".Translate(), ref deconstructInadequateProducts, "CarpenterTables.DeconstructInadequateProducts_ToolTip".Translate());
+            options.CheckboxLabeled("CarpenterTables.DeconstructInadequateProducts".Translate(),
+                ref deconstructInadequateProducts, "CarpenterTables.DeconstructInadequateProducts_ToolTip".Translate());
 
             // Restrict furniture construction
             options.Gap();
-            options.CheckboxLabeled("CarpenterTables.RestrictFurnitureConstruction".Translate(), ref restrictFurnitureConstruction, "CarpenterTables.RestrictFurnitureConstruction_ToolTip".Translate());
+            options.CheckboxLabeled("CarpenterTables.RestrictFurnitureConstruction".Translate(),
+                ref restrictFurnitureConstruction, "CarpenterTables.RestrictFurnitureConstruction_ToolTip".Translate());
 
             // Finish
             options.End();
             Mod.GetSettings<CarpenterTablesSettings>().Write();
-
         }
 
         public override void ExposeData()
         {
             Scribe_Values.Look(ref deconstructInadequateProducts, "deconstructInadequateProducts", true);
-            Scribe_Values.Look(ref restrictFurnitureConstruction, "restrictFurnitureConstruction", false);
+            Scribe_Values.Look(ref restrictFurnitureConstruction, "restrictFurnitureConstruction");
         }
-
     }
-
 }

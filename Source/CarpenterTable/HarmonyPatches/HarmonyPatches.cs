@@ -1,16 +1,14 @@
 ﻿using System.Linq;
 using System.Reflection;
+using HarmonyLib;
 using Verse;
 using Verse.AI;
-using HarmonyLib;
 
 namespace CarpenterTable
 {
-
     [StaticConstructorOnStartup]
     public static class HarmonyPatches
     {
-
         static HarmonyPatches()
         {
             var h = new Harmony("XeoNovaDan.CarpenterTable");
@@ -27,12 +25,13 @@ namespace CarpenterTable
             {
                 return;
             }
+
             var methods = first.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance);
             var method = methods.MaxBy(mi => mi.GetMethodBody()?.GetILAsByteArray().Length ?? -1);
-            h.Patch(method, transpiler: new HarmonyMethod(typeof(Patch_Toils_Recipe.ManualPatch_FinishRecipeAndStartStoringProduct_InitAction), "Transpiler"));
-
+            h.Patch(method,
+                transpiler: new HarmonyMethod(
+                    typeof(Patch_Toils_Recipe.ManualPatch_FinishRecipeAndStartStoringProduct_InitAction),
+                    "Transpiler"));
         }
-
     }
-
 }
