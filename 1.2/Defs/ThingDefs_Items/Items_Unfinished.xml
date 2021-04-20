@@ -8,10 +8,6 @@
       <texPath>Things/Item/Unfinished/UnfinishedSculpture</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-    <stuffCategories>
-      <li>Metallic</li>
-      <li>Woody</li>
-      <li>Stony</li>
-    </stuffCategories>
+    <stuffCategories Inherit="False" />
   </ThingDef>
 </Defs>

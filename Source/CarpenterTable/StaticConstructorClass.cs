@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
 using Verse;
-using static System.String;
 
 namespace CarpenterTable
 {
@@ -17,39 +16,32 @@ namespace CarpenterTable
             var recipes = new List<RecipeDef>();
 
             // Go through each minifiable building's def that is buildable by the player, requires materials, doesn't already have a recipeMaker
-            foreach (var buildingDef in DefDatabase<ThingDef>.AllDefs.Where(d =>
-                d.IsBuildingArtificial && d.Minifiable && d.BuildableByPlayer &&
-                (d.MadeFromStuff || !d.costList.NullOrEmpty()) && d.recipeMaker == null))
+            foreach (var buildingDef in DefDatabase<ThingDef>.AllDefs.Where(d => d.IsBuildingArtificial && d.Minifiable && d.BuildableByPlayer && (d.MadeFromStuff || !d.costList.NullOrEmpty()) && d.recipeMaker == null))
             {
                 var error = false;
+
                 // Create the new Recipe Def
                 var newRecipe = new RecipeDef
-                {
-                    defName = $"{GeneratedRecipeDefPrefix}_{buildingDef.defName}",
-                    modContentPack = CT_RecipeDefOf.BaseCarpentersTableRecipe.modContentPack,
-                    label =
-                        $"[{buildingDef.designationCategory.label.ToUpper()}] - {"RecipeMake".Translate(buildingDef.label).CapitalizeFirst()}",
-                    jobString = "RecipeMakeJobString".Translate(buildingDef.label),
-                    workSpeedStat = StatDefOf.ConstructionSpeed,
-                    workSkill = SkillDefOf.Construction,
-                    unfinishedThingDef = CT_ThingDefOf.UnfinishedBuilding,
-                    recipeUsers = new List<ThingDef> {CT_ThingDefOf.TableCarpenter},
-                    defaultIngredientFilter = CT_RecipeDefOf.BaseCarpentersTableRecipe.defaultIngredientFilter,
-                    effectWorking = EffecterDefOf.ConstructMetal,
-                    soundWorking = SoundDefOf.Building_Complete,
-                    factionPrerequisiteTags = DetermineRecipeFactionPrerequisiteTags(buildingDef.minTechLevelToBuild,
-                        buildingDef.maxTechLevelToBuild)
-                };
+                                    {
+                                        defName = $"{GeneratedRecipeDefPrefix}_{buildingDef.defName}",
+                                        modContentPack = CT_RecipeDefOf.BaseCarpentersTableRecipe.modContentPack,
+                                        label = $"[{buildingDef.designationCategory.label.ToUpper()}] - {"RecipeMake".Translate(buildingDef.label).CapitalizeFirst()}",
+                                        jobString = "RecipeMakeJobString".Translate(buildingDef.label),
+                                        workSpeedStat = StatDefOf.ConstructionSpeed,
+                                        workSkill = SkillDefOf.Construction,
+                                        unfinishedThingDef = CT_ThingDefOf.UnfinishedBuilding,
+                                        recipeUsers = new List<ThingDef> { CT_ThingDefOf.TableCarpenter },
+                                        defaultIngredientFilter = CT_RecipeDefOf.BaseCarpentersTableRecipe.defaultIngredientFilter,
+                                        effectWorking = EffecterDefOf.ConstructMetal,
+                                        soundWorking = SoundDefOf.Building_Complete,
+                                        factionPrerequisiteTags = DetermineRecipeFactionPrerequisiteTags(buildingDef.minTechLevelToBuild, buildingDef.maxTechLevelToBuild)
+                                    };
 
                 // Add construction skill requirement if there is any
                 if (buildingDef.constructionSkillPrerequisite > 0)
                 {
-                    var constructionRequirement = new SkillRequirement
-                    {
-                        skill = SkillDefOf.Construction,
-                        minLevel = buildingDef.constructionSkillPrerequisite
-                    };
-                    newRecipe.skillRequirements = new List<SkillRequirement> {constructionRequirement};
+                    var constructionRequirement = new SkillRequirement { skill = SkillDefOf.Construction, minLevel = buildingDef.constructionSkillPrerequisite };
+                    newRecipe.skillRequirements = new List<SkillRequirement> { constructionRequirement };
                 }
 
                 // Add ingredient count for building's stuff if applicable
@@ -75,16 +67,14 @@ namespace CarpenterTable
                         }
 
                         var materialIngredientCount = new IngredientCount();
-                        materialIngredientCount.SetBaseCount(normalMaterialCost.count *
-                                                             normalMaterialCost.thingDef.VolumePerUnit);
+                        materialIngredientCount.SetBaseCount(normalMaterialCost.count * normalMaterialCost.thingDef.VolumePerUnit);
                         materialIngredientCount.filter.SetAllow(normalMaterialCost.thingDef, true);
                         newRecipe.ingredients.Add(materialIngredientCount);
                     }
 
                     if (error)
                     {
-                        Log.Message(
-                            $"[XND] Carpenter Tables: Some of the materials {buildingDef.defName} is built from does not exist. Possible error in {buildingDef.modContentPack.Name}");
+                        Log.Message($"[XND] Carpenter Tables: Some of the materials {buildingDef.defName} is built from does not exist. Possible error in {buildingDef.modContentPack.Name}");
                         continue;
                     }
                 }
@@ -97,12 +87,11 @@ namespace CarpenterTable
             }
 
             // Sort the list of recipes alphabetically and add to the database
-            recipes.Sort((d1, d2) => Compare(d1.label, d2.label, StringComparison.Ordinal));
+            recipes.Sort((d1, d2) => string.Compare(d1.label, d2.label, StringComparison.Ordinal));
             DefDatabase<RecipeDef>.Add(recipes);
         }
 
-        private static List<string> DetermineRecipeFactionPrerequisiteTags(TechLevel minTechLevel,
-            TechLevel maxTechLevel)
+        private static List<string> DetermineRecipeFactionPrerequisiteTags(TechLevel minTechLevel, TechLevel maxTechLevel)
         {
             // If requirements are undefined, return null
             if (minTechLevel == TechLevel.Undefined && maxTechLevel == TechLevel.Undefined)
@@ -113,8 +102,7 @@ namespace CarpenterTable
             var resultList = new List<string>();
 
             // Go through all of the playable factions which have recipePrerequisiteTags, compare their tech levels to the specified min and max and if appropriate, add the faction's tags to the list
-            foreach (var faction in DefDatabase<FactionDef>.AllDefs.Where(f =>
-                f.isPlayer && !f.recipePrerequisiteTags.NullOrEmpty()))
+            foreach (var faction in DefDatabase<FactionDef>.AllDefs.Where(f => f.isPlayer && !f.recipePrerequisiteTags.NullOrEmpty()))
             {
                 if (faction.techLevel < minTechLevel || faction.techLevel > maxTechLevel)
                 {

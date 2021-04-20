@@ -18,14 +18,9 @@ namespace CarpenterTable
             }
 
             var designationCategory = def.designationCategory;
-            return
-                designationCategory ==
-                DefDatabase<DesignationCategoryDef>.GetNamedSilentFail("Furniture") || // Furniture
-                designationCategory ==
-                DefDatabase<DesignationCategoryDef>.GetNamedSilentFail("Joy") || // Recreation
-                designationCategory ==
-                DefDatabase<DesignationCategoryDef>.GetNamedSilentFail("ANON2MF"); // Furniture+ (More Furniture)
-
+            return designationCategory == DefDatabase<DesignationCategoryDef>.GetNamedSilentFail("Furniture") || // Furniture
+                   designationCategory == DefDatabase<DesignationCategoryDef>.GetNamedSilentFail("Joy") || // Recreation
+                   designationCategory == DefDatabase<DesignationCategoryDef>.GetNamedSilentFail("ANON2MF"); // Furniture+ (More Furniture)
         }
     }
 }

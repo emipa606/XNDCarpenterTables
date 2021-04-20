@@ -2,10 +2,8 @@
 
 namespace CarpenterTable
 {
-
     public class UnfinishedBuilding : UnfinishedThing
     {
-
         public override void Destroy(DestroyMode mode = DestroyMode.Vanish)
         {
             // If the 'construction' of the unfinished building is 'failed', treat it like cancelling the unfinished thing but with construction failure percentages
@@ -22,12 +20,11 @@ namespace CarpenterTable
                     ingredient.stackCount = ingredientCountLeft;
                     GenPlace.TryPlaceThing(ingredient, Position, Map, ThingPlaceMode.Near);
                 }
+
                 ingredients.Clear();
             }
 
             base.Destroy(mode);
         }
-
     }
-
 }

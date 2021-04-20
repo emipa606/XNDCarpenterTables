@@ -3,19 +3,14 @@ using Verse;
 
 namespace CarpenterTable
 {
-
     public class CarpenterTables : Mod
     {
         public CarpenterTablesSettings settings;
 
-        public CarpenterTables(ModContentPack content) : base(content)
+        public CarpenterTables(ModContentPack content)
+            : base(content)
         {
             GetSettings<CarpenterTablesSettings>();
-        }
-
-        public override string SettingsCategory()
-        {
-            return "CarpenterTables.SettingsCategory".Translate();
         }
 
         public override void DoSettingsWindowContents(Rect inRect)
@@ -23,6 +18,9 @@ namespace CarpenterTable
             GetSettings<CarpenterTablesSettings>().DoWindowContents(inRect);
         }
 
+        public override string SettingsCategory()
+        {
+            return "CarpenterTables.SettingsCategory".Translate();
+        }
     }
-
 }

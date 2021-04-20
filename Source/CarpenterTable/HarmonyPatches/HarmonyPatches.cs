@@ -12,7 +12,8 @@ namespace CarpenterTable
         static HarmonyPatches()
         {
             var h = new Harmony("XeoNovaDan.CarpenterTable");
-            //Harmony.DEBUG = true;
+
+            // Harmony.DEBUG = true;
 
             // Automatic patches
             h.PatchAll();
@@ -28,10 +29,7 @@ namespace CarpenterTable
 
             var methods = first.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance);
             var method = methods.MaxBy(mi => mi.GetMethodBody()?.GetILAsByteArray().Length ?? -1);
-            h.Patch(method,
-                transpiler: new HarmonyMethod(
-                    typeof(Patch_Toils_Recipe.ManualPatch_FinishRecipeAndStartStoringProduct_InitAction),
-                    "Transpiler"));
+            h.Patch(method, transpiler: new HarmonyMethod(typeof(Patch_Toils_Recipe.ManualPatch_FinishRecipeAndStartStoringProduct_InitAction), "Transpiler"));
         }
     }
 }
