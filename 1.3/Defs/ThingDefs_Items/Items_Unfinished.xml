@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="UnfinishedBase">
+    <thingClass>CarpenterTable.UnfinishedBuilding</thingClass>
+    <defName>UnfinishedBuilding</defName>
+    <label>unfinished building</label>
+    <graphicData>
+      <texPath>Things/Item/Unfinished/UnfinishedSculpture</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <stuffCategories Inherit="False" />
+  </ThingDef>
+</Defs>

@@ -20,11 +20,13 @@ namespace CarpenterTable
 
             // Automatic deconstruction of low-quality furniture
             options.Gap();
-            options.CheckboxLabeled("CarpenterTables.DeconstructInadequateProducts".Translate(), ref deconstructInadequateProducts, "CarpenterTables.DeconstructInadequateProducts_ToolTip".Translate());
+            options.CheckboxLabeled("CarpenterTables.DeconstructInadequateProducts".Translate(),
+                ref deconstructInadequateProducts, "CarpenterTables.DeconstructInadequateProducts_ToolTip".Translate());
 
             // Restrict furniture construction
             options.Gap();
-            options.CheckboxLabeled("CarpenterTables.RestrictFurnitureConstruction".Translate(), ref restrictFurnitureConstruction, "CarpenterTables.RestrictFurnitureConstruction_ToolTip".Translate());
+            options.CheckboxLabeled("CarpenterTables.RestrictFurnitureConstruction".Translate(),
+                ref restrictFurnitureConstruction, "CarpenterTables.RestrictFurnitureConstruction_ToolTip".Translate());
 
             // Finish
             options.End();

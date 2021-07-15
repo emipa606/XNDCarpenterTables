@@ -20,7 +20,7 @@ namespace CarpenterTable
             {
                 var instructionList = instructions.ToList();
 
-                toilInstruction = instructionList.First(i => i.operand is FieldInfo fi && fi.Name == "toil");
+                toilInstruction = instructionList.First(i => i.operand is FieldInfo {Name: "toil"});
                 var listExists = false;
 
                 for (var i = 0; i < instructionList.Count; i++)
@@ -38,27 +38,36 @@ namespace CarpenterTable
                             if (fifthInstructionAhead.opcode == OpCodes.Callvirt)
                             {
                                 // Add calls to the auto-deconstruct helper method before each call for EndCurrentJob
-                                if ((MethodInfo)fifthInstructionAhead.operand == AccessTools.Method(typeof(Pawn_JobTracker), nameof(Pawn_JobTracker.EndCurrentJob)))
+                                if ((MethodInfo) fifthInstructionAhead.operand ==
+                                    AccessTools.Method(typeof(Pawn_JobTracker), nameof(Pawn_JobTracker.EndCurrentJob)))
                                 {
-                                    foreach (var helperInstruction in TranspilerHelperAutoDeconstructCallInstructions(false))
+                                    foreach (var helperInstruction in TranspilerHelperAutoDeconstructCallInstructions(
+                                        false))
                                     {
                                         yield return helperInstruction;
                                     }
                                 }
 
                                 // Add calls to the 'don't count iteration' helper method before each call for Notify_IterationCompleted
-                                else if ((MethodInfo)fifthInstructionAhead.operand == AccessTools.Method(typeof(Bill), nameof(Bill.Notify_IterationCompleted)))
+                                else if ((MethodInfo) fifthInstructionAhead.operand ==
+                                         AccessTools.Method(typeof(Bill), nameof(Bill.Notify_IterationCompleted)))
                                 {
                                     yield return new CodeInstruction(OpCodes.Ldarg_0); // this
                                     yield return toilInstruction; // this.toil
                                     yield return new CodeInstruction(OpCodes.Ldloc_S, 6); // list
-                                    yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ManualPatch_FinishRecipeAndStartStoringProduct_InitAction), nameof(TranspilerHelper_DontCountIteration))); // TranspilerHelper_DontCountIteration(this.toil, list)
+                                    yield return new CodeInstruction(OpCodes.Call,
+                                        AccessTools.Method(
+                                            typeof(ManualPatch_FinishRecipeAndStartStoringProduct_InitAction),
+                                            nameof(
+                                                TranspilerHelper_DontCountIteration))); // TranspilerHelper_DontCountIteration(this.toil, list)
                                 }
                             }
                         }
 
                         // Add call to the auto-deconstruct helper method if the current line is 'curJob.count = 99999' (i.e. if product would normally be carried to a stockpile)
-                        if (instruction.opcode == OpCodes.Stfld && (FieldInfo)instruction.operand == AccessTools.Field(typeof(Job), nameof(Job.count)) && (int)instructionList[i - 1].operand == 99999)
+                        if (instruction.opcode == OpCodes.Stfld &&
+                            (FieldInfo) instruction.operand == AccessTools.Field(typeof(Job), nameof(Job.count)) &&
+                            (int) instructionList[i - 1].operand == 99999)
                         {
                             yield return instruction;
                             foreach (var helperInstruction in TranspilerHelperAutoDeconstructCallInstructions(true))
@@ -72,7 +81,8 @@ namespace CarpenterTable
 
                     yield return instruction;
 
-                    if (!listExists && instruction.opcode == OpCodes.Stloc_S && ((LocalBuilder)instruction.operand).LocalIndex == 6)
+                    if (!listExists && instruction.opcode == OpCodes.Stloc_S &&
+                        ((LocalBuilder) instruction.operand).LocalIndex == 6)
                     {
                         listExists = true;
                     }
@@ -97,7 +107,7 @@ namespace CarpenterTable
 
                 // If the product has quality and the quality doesn't meet the bill's standards, designate a deconstruction on the product
                 var product = products.First();
-                var productionBill = (Bill_Production)curJob.bill;
+                var productionBill = (Bill_Production) curJob.bill;
                 if (ProductMeetsQualityRequirement(product, productionBill.qualityRange))
                 {
                     return;
@@ -129,8 +139,9 @@ namespace CarpenterTable
                 }
 
                 var product = products.First();
-                var productionBill = (Bill_Production)curJob.bill;
-                if (productionBill.repeatMode == BillRepeatModeDefOf.RepeatCount && !ProductMeetsQualityRequirement(product, productionBill.qualityRange))
+                var productionBill = (Bill_Production) curJob.bill;
+                if (productionBill.repeatMode == BillRepeatModeDefOf.RepeatCount &&
+                    !ProductMeetsQualityRequirement(product, productionBill.qualityRange))
                 {
                     productionBill.repeatCount++;
                 }
@@ -147,8 +158,11 @@ namespace CarpenterTable
                 yield return new CodeInstruction(OpCodes.Ldarg_0); // this
                 yield return toilInstruction; // this.toil
                 yield return new CodeInstruction(OpCodes.Ldloc_S, 6); // list
-                yield return new CodeInstruction(endCurrent ? OpCodes.Ldc_I4_1 : OpCodes.Ldc_I4_0); // endCurrent (effectively)
-                yield return new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(ManualPatch_FinishRecipeAndStartStoringProduct_InitAction), nameof(TranspilerHelper_AutoDeconstruct))); // TranspilerHelper_AutoDeconstruct(this.toil, list, endCurrent)
+                yield return
+                    new CodeInstruction(endCurrent ? OpCodes.Ldc_I4_1 : OpCodes.Ldc_I4_0); // endCurrent (effectively)
+                yield return new CodeInstruction(OpCodes.Call,
+                    AccessTools.Method(typeof(ManualPatch_FinishRecipeAndStartStoringProduct_InitAction),
+                        nameof(TranspilerHelper_AutoDeconstruct))); // TranspilerHelper_AutoDeconstruct(this.toil, list, endCurrent)
             }
         }
 
@@ -161,26 +175,31 @@ namespace CarpenterTable
                 // Change the tickAction
                 var tickAction = __result.tickAction;
                 __result.tickAction = () =>
+                {
+                    // If the thing being worked on is an unfinished building, check for construction failure
+                    var actor = __result.actor;
+                    if (actor.CurJob.GetTarget(TargetIndex.B).Thing is UnfinishedBuilding unfinishedBuilding)
                     {
-                        // If the thing being worked on is an unfinished building, check for construction failure
-                        var actor = __result.actor;
-                        if (actor.CurJob.GetTarget(TargetIndex.B).Thing is UnfinishedBuilding unfinishedBuilding)
+                        var successChance = actor.GetStatValue(StatDefOf.ConstructSuccessChance);
+                        var constructionSpeed = actor.GetStatValue(StatDefOf.ConstructionSpeed);
+                        var workToBuild = unfinishedBuilding.Recipe.WorkAmountTotal(unfinishedBuilding.Stuff);
+                        if (Rand.Chance(1 - Mathf.Pow(successChance, constructionSpeed / workToBuild)))
                         {
-                            var successChance = actor.GetStatValue(StatDefOf.ConstructSuccessChance);
-                            var constructionSpeed = actor.GetStatValue(StatDefOf.ConstructionSpeed);
-                            var workToBuild = unfinishedBuilding.Recipe.WorkAmountTotal(unfinishedBuilding.Stuff);
-                            if (Rand.Chance(1 - Mathf.Pow(successChance, constructionSpeed / workToBuild)))
-                            {
-                                actor.jobs.EndCurrentJob(JobCondition.Incompletable);
-                                MoteMaker.ThrowText(unfinishedBuilding.DrawPos, unfinishedBuilding.Map, "TextMote_ConstructionFail".Translate(), 6);
-                                Messages.Message("MessageConstructionFailed".Translate(unfinishedBuilding.Label.UncapitalizeFirst(), actor.LabelShort, actor.Named("WORKER")), new TargetInfo(unfinishedBuilding.Position, unfinishedBuilding.Map), MessageTypeDefOf.NegativeEvent);
-                                unfinishedBuilding.Destroy(DestroyMode.FailConstruction);
-                                return;
-                            }
+                            actor.jobs.EndCurrentJob(JobCondition.Incompletable);
+                            MoteMaker.ThrowText(unfinishedBuilding.DrawPos, unfinishedBuilding.Map,
+                                "TextMote_ConstructionFail".Translate(), 6);
+                            Messages.Message(
+                                "MessageConstructionFailed".Translate(unfinishedBuilding.Label.UncapitalizeFirst(),
+                                    actor.LabelShort, actor.Named("WORKER")),
+                                new TargetInfo(unfinishedBuilding.Position, unfinishedBuilding.Map),
+                                MessageTypeDefOf.NegativeEvent);
+                            unfinishedBuilding.Destroy(DestroyMode.FailConstruction);
+                            return;
                         }
+                    }
 
-                        tickAction();
-                    };
+                    tickAction();
+                };
             }
         }
     }

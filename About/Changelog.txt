@@ -1,5 +1,8 @@
 # Changelog for XNDCarpenterTables
 
+1.0.5.0 - Mod updated for 1.3 and passed autotests
+
+
 1.0.4.0 - Fixed an issue with making items not made from any stuffable material
 
 

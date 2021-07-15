@@ -29,17 +29,17 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=1801858878
 
 Should be safely addable to ongoing savegames. If removed from ongoing savegames, errors will be thrown if carpenter tables were present, though there should be no lasting effects.
 
-Appropriate buildings (buildable and minifiable) from other mods will automatically be made producible at carpenter tables without any additional patching required. Haven't been able to test with Zetrith's Multiplayer but should theoretically work. If using MinifyEverything, place this mod below that one in the load order.
+Appropriate buildings (buildable and minifiable) from other mods will automatically be made producible at carpenter tables without any additional patching required. Haven&apos;t been able to test with Zetrith&apos;s Multiplayer but should theoretically work. If using MinifyEverything, place this mod below that one in the load order.
 
 If you find any bugs, please link me to a full output log and give some basic information on how you triggered the bug; this is vital information for me to be able to fix said bugs.
 
 # **Overview**
 
-This mod, as its name suggests, adds a carpenter's table to the game. Carpenter tables are where your constructors can produce buildings that are 'minifiable'; buildings such as turrets and beds can be created at a carpenter's table for instance, but not other buildings such as walls or doors - unless you use https://steamcommunity.com/sharedfiles/filedetails/?id=872762753]**MinifyEverything** of course!
+This mod, as its name suggests, adds a carpenter&apos;s table to the game. Carpenter tables are where your constructors can produce buildings that are &apos;minifiable&apos;; buildings such as turrets and beds can be created at a carpenter&apos;s table for instance, but not other buildings such as walls or doors - unless you use https://steamcommunity.com/sharedfiles/filedetails/?id=872762753]**MinifyEverything** of course!
 
-It is also worth noting that carpenter tables **do not** replace the traditional way of creating furniture in RimWorld; it is still possible to build furniture the good old-fashioned way - though there is an option in the mod's settings to change this (though disabled by default).
+It is also worth noting that carpenter tables **do not** replace the traditional way of creating furniture in RimWorld; it is still possible to build furniture the good old-fashioned way - though there is an option in the mod&apos;s settings to change this (though disabled by default).
 
-The benefits of being able to produce furniture at a carpenter's table as opposed to traditionally placing blueprints include:
+The benefits of being able to produce furniture at a carpenter&apos;s table as opposed to traditionally placing blueprints include:
 
 
 - Having better control over who can make certain furniture without having to micromanage your builders, thus allowing for better quality control (much like https://steamcommunity.com/sharedfiles/filedetails/?id=754637870]**QualityBuilder**)
@@ -48,7 +48,7 @@ The benefits of being able to produce furniture at a carpenter's table as oppose
 
 
 
-**A demonstration of the better quality control offered by using a carpenter's table:**
+**A demonstration of the better quality control offered by using a carpenter&apos;s table:**
 
 ![Image](https://i.imgur.com/ebDiqAg.png)
 
@@ -56,9 +56,9 @@ The benefits of being able to produce furniture at a carpenter's table as oppose
 ![Image](https://i.imgur.com/AhrUZHS.gif)
 
 
-I highly recommend using https://steamcommunity.com/sharedfiles/filedetails/?id=1446523594]**Dubs Mint Menus** with this mod since the carpenter's table will naturally have a lot of bills (especially with loads of furniture mods) and Mint Menus makes that a lot more manageable, and you can also search for furniture by their categories as shown in the thumbnail. If not using Dubs Mint Menus, the bill list is still ordered alphabetically in a bid to make everything easier to find.
+I highly recommend using https://steamcommunity.com/sharedfiles/filedetails/?id=1446523594]**Dubs Mint Menus** with this mod since the carpenter&apos;s table will naturally have a lot of bills (especially with loads of furniture mods) and Mint Menus makes that a lot more manageable, and you can also search for furniture by their categories as shown in the thumbnail. If not using Dubs Mint Menus, the bill list is still ordered alphabetically in a bid to make everything easier to find.
 
-Of course, just like when traditionally building furniture, producing furniture at a carpenter's table uses the 'work to build' stats of furniture and its materials. It is also still possible for colonists to fail construction projects at carpenter tables.
+Of course, just like when traditionally building furniture, producing furniture at a carpenter&apos;s table uses the &apos;work to build&apos; stats of furniture and its materials. It is also still possible for colonists to fail construction projects at carpenter tables.
 
 Powered by the Harmony Patch Library.
 
@@ -68,7 +68,7 @@ Powered by the Harmony Patch Library.
 
 
 - https://steamcommunity.com/sharedfiles/filedetails/?id=1446523594]**Dubs Mint Menus** by **Dubwise**
-- https://steamcommunity.com/sharedfiles/filedetails/?id=1617282896]**LWM's Deep Storage** by **lilwhitemouse**
+- https://steamcommunity.com/sharedfiles/filedetails/?id=1617282896]**LWM&apos;s Deep Storage** by **lilwhitemouse**
 - https://steamcommunity.com/sharedfiles/filedetails/?id=1668983184]**RimThemes** by **aRandomKiwi**
 
 
