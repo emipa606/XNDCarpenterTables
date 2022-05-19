@@ -33,7 +33,7 @@ namespace CarpenterTable
                     workSpeedStat = StatDefOf.ConstructionSpeed,
                     workSkill = SkillDefOf.Construction,
                     unfinishedThingDef = CT_ThingDefOf.UnfinishedBuilding,
-                    recipeUsers = new List<ThingDef> {CT_ThingDefOf.TableCarpenter},
+                    recipeUsers = new List<ThingDef> { CT_ThingDefOf.TableCarpenter },
                     defaultIngredientFilter = CT_RecipeDefOf.BaseCarpentersTableRecipe.defaultIngredientFilter,
                     effectWorking = EffecterDefOf.ConstructMetal,
                     soundWorking = SoundDefOf.Building_Complete,
@@ -45,8 +45,8 @@ namespace CarpenterTable
                 if (buildingDef.constructionSkillPrerequisite > 0)
                 {
                     var constructionRequirement = new SkillRequirement
-                        {skill = SkillDefOf.Construction, minLevel = buildingDef.constructionSkillPrerequisite};
-                    newRecipe.skillRequirements = new List<SkillRequirement> {constructionRequirement};
+                        { skill = SkillDefOf.Construction, minLevel = buildingDef.constructionSkillPrerequisite };
+                    newRecipe.skillRequirements = new List<SkillRequirement> { constructionRequirement };
                 }
 
                 // Add ingredient count for building's stuff if applicable

@@ -20,7 +20,7 @@ namespace CarpenterTable
             {
                 var instructionList = instructions.ToList();
 
-                toilInstruction = instructionList.First(i => i.operand is FieldInfo {Name: "toil"});
+                toilInstruction = instructionList.First(i => i.operand is FieldInfo { Name: "toil" });
                 var listExists = false;
 
                 for (var i = 0; i < instructionList.Count; i++)
@@ -38,7 +38,7 @@ namespace CarpenterTable
                             if (fifthInstructionAhead.opcode == OpCodes.Callvirt)
                             {
                                 // Add calls to the auto-deconstruct helper method before each call for EndCurrentJob
-                                if ((MethodInfo) fifthInstructionAhead.operand ==
+                                if ((MethodInfo)fifthInstructionAhead.operand ==
                                     AccessTools.Method(typeof(Pawn_JobTracker), nameof(Pawn_JobTracker.EndCurrentJob)))
                                 {
                                     foreach (var helperInstruction in TranspilerHelperAutoDeconstructCallInstructions(
@@ -49,7 +49,7 @@ namespace CarpenterTable
                                 }
 
                                 // Add calls to the 'don't count iteration' helper method before each call for Notify_IterationCompleted
-                                else if ((MethodInfo) fifthInstructionAhead.operand ==
+                                else if ((MethodInfo)fifthInstructionAhead.operand ==
                                          AccessTools.Method(typeof(Bill), nameof(Bill.Notify_IterationCompleted)))
                                 {
                                     yield return new CodeInstruction(OpCodes.Ldarg_0); // this
@@ -66,8 +66,8 @@ namespace CarpenterTable
 
                         // Add call to the auto-deconstruct helper method if the current line is 'curJob.count = 99999' (i.e. if product would normally be carried to a stockpile)
                         if (instruction.opcode == OpCodes.Stfld &&
-                            (FieldInfo) instruction.operand == AccessTools.Field(typeof(Job), nameof(Job.count)) &&
-                            (int) instructionList[i - 1].operand == 99999)
+                            (FieldInfo)instruction.operand == AccessTools.Field(typeof(Job), nameof(Job.count)) &&
+                            (int)instructionList[i - 1].operand == 99999)
                         {
                             yield return instruction;
                             foreach (var helperInstruction in TranspilerHelperAutoDeconstructCallInstructions(true))
@@ -82,7 +82,7 @@ namespace CarpenterTable
                     yield return instruction;
 
                     if (!listExists && instruction.opcode == OpCodes.Stloc_S &&
-                        ((LocalBuilder) instruction.operand).LocalIndex == 6)
+                        ((LocalBuilder)instruction.operand).LocalIndex == 6)
                     {
                         listExists = true;
                     }
@@ -107,7 +107,7 @@ namespace CarpenterTable
 
                 // If the product has quality and the quality doesn't meet the bill's standards, designate a deconstruction on the product
                 var product = products.First();
-                var productionBill = (Bill_Production) curJob.bill;
+                var productionBill = (Bill_Production)curJob.bill;
                 if (ProductMeetsQualityRequirement(product, productionBill.qualityRange))
                 {
                     return;
@@ -139,7 +139,7 @@ namespace CarpenterTable
                 }
 
                 var product = products.First();
-                var productionBill = (Bill_Production) curJob.bill;
+                var productionBill = (Bill_Production)curJob.bill;
                 if (productionBill.repeatMode == BillRepeatModeDefOf.RepeatCount &&
                     !ProductMeetsQualityRequirement(product, productionBill.qualityRange))
                 {
