@@ -1,26 +1,30 @@
-﻿using UnityEngine;
+﻿using Mlie;
+using UnityEngine;
 using Verse;
 
-namespace CarpenterTable
+namespace CarpenterTable;
+
+public class CarpenterTables : Mod
 {
-    public class CarpenterTables : Mod
+    public static string currentVersion;
+    public CarpenterTablesSettings settings;
+
+    public CarpenterTables(ModContentPack content)
+        : base(content)
     {
-        public CarpenterTablesSettings settings;
+        GetSettings<CarpenterTablesSettings>();
+        currentVersion =
+            VersionFromManifest.GetVersionFromModMetaData(
+                ModLister.GetActiveModWithIdentifier("Mlie.XNDCarpenterTables"));
+    }
 
-        public CarpenterTables(ModContentPack content)
-            : base(content)
-        {
-            GetSettings<CarpenterTablesSettings>();
-        }
+    public override void DoSettingsWindowContents(Rect inRect)
+    {
+        GetSettings<CarpenterTablesSettings>().DoWindowContents(inRect);
+    }
 
-        public override void DoSettingsWindowContents(Rect inRect)
-        {
-            GetSettings<CarpenterTablesSettings>().DoWindowContents(inRect);
-        }
-
-        public override string SettingsCategory()
-        {
-            return "CarpenterTables.SettingsCategory".Translate();
-        }
+    public override string SettingsCategory()
+    {
+        return "CarpenterTables.SettingsCategory".Translate();
     }
 }

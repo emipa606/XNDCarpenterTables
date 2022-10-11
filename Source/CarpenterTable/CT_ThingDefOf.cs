@@ -1,13 +1,12 @@
 ﻿using RimWorld;
 using Verse;
 
-namespace CarpenterTable
-{
-    [DefOf]
-    public static class CT_ThingDefOf
-    {
-        public static ThingDef TableCarpenter;
+namespace CarpenterTable;
 
-        public static ThingDef UnfinishedBuilding;
-    }
+[DefOf]
+public static class CT_ThingDefOf
+{
+    public static ThingDef TableCarpenter;
+
+    public static ThingDef UnfinishedBuilding;
 }
