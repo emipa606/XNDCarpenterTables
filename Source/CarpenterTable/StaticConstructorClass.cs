@@ -33,7 +33,7 @@ public static class StaticConstructorClass
                 workSpeedStat = StatDefOf.ConstructionSpeed,
                 workSkill = SkillDefOf.Construction,
                 unfinishedThingDef = CT_ThingDefOf.UnfinishedBuilding,
-                recipeUsers = new List<ThingDef> { CT_ThingDefOf.TableCarpenter },
+                recipeUsers = [CT_ThingDefOf.TableCarpenter],
                 defaultIngredientFilter = CT_RecipeDefOf.BaseCarpentersTableRecipe.defaultIngredientFilter,
                 effectWorking = EffecterDefOf.ConstructMetal,
                 soundWorking = SoundDefOf.Building_Complete,
@@ -46,7 +46,7 @@ public static class StaticConstructorClass
             {
                 var constructionRequirement = new SkillRequirement
                     { skill = SkillDefOf.Construction, minLevel = buildingDef.constructionSkillPrerequisite };
-                newRecipe.skillRequirements = new List<SkillRequirement> { constructionRequirement };
+                newRecipe.skillRequirements = [constructionRequirement];
             }
 
             // Add ingredient count for building's stuff if applicable
@@ -109,7 +109,7 @@ public static class StaticConstructorClass
 
         var resultList = new List<string>();
 
-        // Go through all of the playable factions which have recipePrerequisiteTags, compare their tech levels to the specified min and max and if appropriate, add the faction's tags to the list
+        // Go through all the playable factions which have recipePrerequisiteTags, compare their tech levels to the specified min and max and if appropriate, add the faction's tags to the list
         foreach (var faction in DefDatabase<FactionDef>.AllDefs.Where(f =>
                      f.isPlayer && !f.recipePrerequisiteTags.NullOrEmpty()))
         {

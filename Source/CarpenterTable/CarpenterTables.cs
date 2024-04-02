@@ -14,8 +14,7 @@ public class CarpenterTables : Mod
     {
         GetSettings<CarpenterTablesSettings>();
         currentVersion =
-            VersionFromManifest.GetVersionFromModMetaData(
-                ModLister.GetActiveModWithIdentifier("Mlie.XNDCarpenterTables"));
+            VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
     }
 
     public override void DoSettingsWindowContents(Rect inRect)
