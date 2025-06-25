@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <!-- Only exists so that all C#-generated RecipeDefs have a defaultIngredientFilter since 'categories' is private -->
   <RecipeDef>

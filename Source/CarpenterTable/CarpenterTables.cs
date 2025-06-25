@@ -6,14 +6,13 @@ namespace CarpenterTable;
 
 public class CarpenterTables : Mod
 {
-    public static string currentVersion;
-    public CarpenterTablesSettings settings;
+    public static string CurrentVersion;
 
     public CarpenterTables(ModContentPack content)
         : base(content)
     {
         GetSettings<CarpenterTablesSettings>();
-        currentVersion =
+        CurrentVersion =
             VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
     }
 

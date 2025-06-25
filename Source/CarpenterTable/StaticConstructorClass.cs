@@ -37,7 +37,7 @@ public static class StaticConstructorClass
                 defaultIngredientFilter = CT_RecipeDefOf.BaseCarpentersTableRecipe.defaultIngredientFilter,
                 effectWorking = EffecterDefOf.ConstructMetal,
                 soundWorking = SoundDefOf.Building_Complete,
-                factionPrerequisiteTags = DetermineRecipeFactionPrerequisiteTags(buildingDef.minTechLevelToBuild,
+                factionPrerequisiteTags = determineRecipeFactionPrerequisiteTags(buildingDef.minTechLevelToBuild,
                     buildingDef.maxTechLevelToBuild)
             };
 
@@ -98,7 +98,7 @@ public static class StaticConstructorClass
         DefDatabase<RecipeDef>.Add(recipes);
     }
 
-    private static List<string> DetermineRecipeFactionPrerequisiteTags(TechLevel minTechLevel,
+    private static List<string> determineRecipeFactionPrerequisiteTags(TechLevel minTechLevel,
         TechLevel maxTechLevel)
     {
         // If requirements are undefined, return null

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: do carpentry -->
+  <DoBillsCarpentersTable.label>do carpentry</DoBillsCarpentersTable.label>
+  <!-- EN: doing carpentry at -->
+  <DoBillsCarpentersTable.gerund>doing carpentry at</DoBillsCarpentersTable.gerund>
+  <!-- EN: do carpentry -->
+  <DoBillsCarpentersTable.verb>do carpentry</DoBillsCarpentersTable.verb>
+</LanguageData>

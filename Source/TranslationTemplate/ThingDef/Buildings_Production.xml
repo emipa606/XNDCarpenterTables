@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: carpenter's table -->
+  <TableCarpenter.label>carpenter's table</TableCarpenter.label>
+  <!-- EN: A heavy table for constructors to assemble furniture at. -->
+  <TableCarpenter.description>A heavy table for constructors to assemble furniture at.</TableCarpenter.description>
+</LanguageData>
