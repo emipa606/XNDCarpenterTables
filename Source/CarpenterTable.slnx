@@ -3,4 +3,25 @@
     <BuildType Name="Release" />
   </Configurations>
   <Project Path="CarpenterTable/CarpenterTable.csproj" />
+  <Folder Name="/.github/">
+    <File Path="../.github/copilot-instructions.md" />
+  </Folder>
+  <Folder Name="/XML/1.6/Defs/ThingDefs_Buildings/">
+    <File Path="../1.6/Defs/ThingDefs_Buildings/Buildings_Production.xml" />
+  </Folder>
+  <Folder Name="/XML/1.6/Defs/ThingDefs_Items/">
+    <File Path="../1.6/Defs/ThingDefs_Items/Items_Unfinished.xml" />
+  </Folder>
+  <Folder Name="/XML/About/">
+    <File Path="../About/about.xml" />
+  </Folder>
+  <Folder Name="/XML/Languages/English/Keyed/">
+    <File Path="../Languages/English/Keyed/Keys.xml" />
+  </Folder>
+  <Folder Name="/XML/1.6/Defs/RecipeDefs/">
+    <File Path="../1.6/Defs/RecipeDefs/Recipes_Production.xml" />
+  </Folder>
+  <Folder Name="/XML/1.6/Defs/WorkGiverDefs/">
+    <File Path="../1.6/Defs/WorkGiverDefs/WorkGivers.xml" />
+  </Folder>
 </Solution>

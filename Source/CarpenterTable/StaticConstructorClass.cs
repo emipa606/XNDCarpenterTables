@@ -10,9 +10,31 @@ namespace CarpenterTable;
 public static class StaticConstructorClass
 {
     public const string GeneratedRecipeDefPrefix = "CarpenterTableMake";
+    private static bool recipeGenerationComplete;
 
     static StaticConstructorClass()
     {
+        EnsureGeneratedRecipes();
+    }
+
+    public static bool EnsureGeneratedRecipes()
+    {
+        if (recipeGenerationComplete)
+        {
+            return false;
+        }
+
+        // DefOf fields can be unresolved if called too early; retry from demand-based call sites.
+        if (CT_RecipeDefOf.BaseCarpentersTableRecipe == null || CT_ThingDefOf.TableCarpenter == null ||
+            CT_ThingDefOf.UnfinishedBuilding == null)
+        {
+            return false;
+        }
+
+        var existingGeneratedRecipeNames = new HashSet<string>(DefDatabase<RecipeDef>.AllDefsListForReading
+            .Where(recipe => recipe.defName.StartsWith(GeneratedRecipeDefPrefix + "_"))
+            .Select(recipe => recipe.defName));
+
         var recipes = new List<RecipeDef>();
 
         // Go through each minifiable building's def that is buildable by the player, requires materials, doesn't already have a recipeMaker
@@ -20,12 +42,18 @@ public static class StaticConstructorClass
                      d.IsBuildingArtificial && d.Minifiable && d.BuildableByPlayer &&
                      (d.MadeFromStuff || !d.costList.NullOrEmpty()) && d.recipeMaker == null))
         {
+            var generatedDefName = $"{GeneratedRecipeDefPrefix}_{buildingDef.defName}";
+            if (existingGeneratedRecipeNames.Contains(generatedDefName))
+            {
+                continue;
+            }
+
             var error = false;
 
             // Create the new Recipe Def
             var newRecipe = new RecipeDef
             {
-                defName = $"{GeneratedRecipeDefPrefix}_{buildingDef.defName}",
+                defName = generatedDefName,
                 modContentPack = CT_RecipeDefOf.BaseCarpentersTableRecipe.modContentPack,
                 label =
                     $"[{buildingDef.designationCategory.label.ToUpper()}] - {"RecipeMake".Translate(buildingDef.label).CapitalizeFirst()}",
@@ -93,9 +121,19 @@ public static class StaticConstructorClass
             recipes.Add(newRecipe);
         }
 
+        if (recipes.Count == 0)
+        {
+            // Don't lock completion if generation may have run before all defs were in their final state.
+            // If generated recipes already exist, we're done; otherwise allow later retries.
+            recipeGenerationComplete = existingGeneratedRecipeNames.Count > 0;
+            return false;
+        }
+
         // Sort the list of recipes alphabetically and add to the database
         recipes.Sort((d1, d2) => string.Compare(d1.label, d2.label, StringComparison.Ordinal));
         DefDatabase<RecipeDef>.Add(recipes);
+        recipeGenerationComplete = true;
+        return true;
     }
 
     private static List<string> determineRecipeFactionPrerequisiteTags(TechLevel minTechLevel,

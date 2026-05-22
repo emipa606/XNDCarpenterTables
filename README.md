@@ -1,13 +1,13 @@
 # [[XND] Carpenter Tables (Continued)](https://steamcommunity.com/sharedfiles/filedetails/?id=2375479881)
 
-![Image](https://i.imgur.com/buuPQel.png)
+![Image](https://img.litet.net/logos/Info.png)
 
 Update of XeoNovaDans mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=1801858878
 
-![Image](https://i.imgur.com/pufA0kM.png)
+![Image](https://img.litet.net/logos/Notice.png)
 	
-![Image](https://i.imgur.com/Z4GOv8H.png)
+![Image](https://img.litet.net/logos/OriginalDescription.png)
 
 # **Multilingual Support**
 
@@ -39,9 +39,9 @@ The benefits of being able to produce furniture at a carpenter's table as oppose
 
 **A demonstration of the better quality control offered by using a carpenter's table:**
 
-![Image](https://i.imgur.com/ebDiqAg.png)
+![Image](https://img.litet.net/ebDiqAg.png)
 
-![Image](https://i.imgur.com/AhrUZHS.gif)
+![Image](https://img.litet.net/AhrUZHS.gif)
 
 I highly recommend using [**Dubs Mint Menus**](https://steamcommunity.com/sharedfiles/filedetails/?id=1446523594) with this mod since the carpenter's table will naturally have a lot of bills (especially with loads of furniture mods) and Mint Menus makes that a lot more manageable, and you can also search for furniture by their categories as shown in the thumbnail. If not using Dubs Mint Menus, the bill list is still ordered alphabetically in a bid to make everything easier to find.
 
@@ -67,13 +67,13 @@ Marnador for their great work with their RimWorld-styled font.
 
 You may use this mod in your mod packs, and you may also derive from the mod. All that I ask is that you please let me know, and give me credit and provide a link to this page.
 
-![Image](https://i.imgur.com/PwoNOj4.png)
+![Image](https://img.litet.net/logos/ReportingIssues.png)
 
 
 
 -  See if the the error persists if you just have this mod and its requirements active.
 -  If not, try adding your other mods until it happens again.
--  Post your error-log using [HugsLib](https://steamcommunity.com/workshop/filedetails/?id=818773962) or the standalone [Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404) and command Ctrl+F12
+-  Always post your log using the [Log Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404)
 -  For best support, please use the Discord-channel for error-reporting.
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
@@ -81,4 +81,4 @@ You may use this mod in your mod packs, and you may also derive from the mod. Al
 
  
 
-[![Image](https://img.shields.io/github/v/release/emipa606/XNDCarpenterTables?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2375479881) | tags:  crafting,  workbench
+[![Image](https://img.shields.io/github/v/release/emipa606/XNDCarpenterTables?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2375479881) | tags: workbench, crafting

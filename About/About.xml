@@ -24,24 +24,24 @@
     <li>brrainz.harmony</li>
     <li>erdelf.MinifyEverything</li>
   </loadAfter>
-  <description>[img]https://i.imgur.com/buuPQel.png[/img]
+  <description>[img]https://img.litet.net/logos/Info.png[/img]
 Update of XeoNovaDans mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=1801858878
 
-[img]https://i.imgur.com/pufA0kM.png[/img]
+[img]https://img.litet.net/logos/Notice.png[/img]
 
 [table]
     [tr]
-        [td][url=https://dsc.gg/mlie][img]https://i.imgur.com/zdzzBrc.png[/img][/url][/td]
-        [td][url=https://github.com/emipa606/XNDCarpenterTables][img]https://i.imgur.com/kTkpTOE.png[/img][/url][/td]
+        [td][url=https://discord.gg/h5TY6DA][img]https://img.litet.net/logos/Discord.png[/img][/url][/td]
+        [td][url=https://github.com/emipa606/XNDCarpenterTables][img]https://img.litet.net/logos/Github.png[/img][/url][/td]
     [/tr]
     [tr]
-        [td][img]https://i.imgur.com/WjDSfUn.png[/img][/td]
-        [td][img]https://i.imgur.com/Be8E2qJ.png[/img][/td]
+        [td][img]https://img.litet.net/logos/SafeToAdd.png[/img][/td]
+        [td][img]https://img.litet.net/logos/RemoveMayWork.png[/img][/td]
     [/tr]
 [/table]
 	
-[img]https://i.imgur.com/Z4GOv8H.png[/img]
+[img]https://img.litet.net/logos/OriginalDescription.png[/img]
 
 [h1][b]Multilingual Support[/b][/h1]
 中文 - HawnHan
@@ -68,9 +68,9 @@ The benefits of being able to produce furniture at a carpenter's table as oppose
 
 [b]A demonstration of the better quality control offered by using a carpenter's table:[/b]
 
-[img]https://i.imgur.com/ebDiqAg.png[/img]
+[img]https://img.litet.net/ebDiqAg.png[/img]
 
-[img]https://i.imgur.com/AhrUZHS.gif[/img]
+[img]https://img.litet.net/AhrUZHS.gif[/img]
 
 I highly recommend using [url=https://steamcommunity.com/sharedfiles/filedetails/?id=1446523594][b]Dubs Mint Menus[/b][/url] with this mod since the carpenter's table will naturally have a lot of bills (especially with loads of furniture mods) and Mint Menus makes that a lot more manageable, and you can also search for furniture by their categories as shown in the thumbnail. If not using Dubs Mint Menus, the bill list is still ordered alphabetically in a bid to make everything easier to find.
 
@@ -92,17 +92,17 @@ Marnador for their great work with their RimWorld-styled font.
 [h1][b]License[/b][/h1]
 You may use this mod in your mod packs, and you may also derive from the mod. All that I ask is that you please let me know, and give me credit and provide a link to this page.
 
-[img]https://i.imgur.com/PwoNOj4.png[/img]
+[img]https://img.litet.net/logos/ReportingIssues.png[/img]
 [list]
 [*] See if the the error persists if you just have this mod and its requirements active.
 [*] If not, try adding your other mods until it happens again.
-[*] Post your error-log using [url=https://steamcommunity.com/workshop/filedetails/?id=818773962]HugsLib[/url] or the standalone [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404]Uploader[/url] and command Ctrl+F12
+[*] Always post your log using the [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404]Log Uploader[/url]
 [*] For best support, please use the Discord-channel for error-reporting.
 [*] Do not report errors by making a discussion-thread, I get no notification of that.
 [*] If you have the solution for a problem, please post it to the GitHub repository.
 [*] Use [url=https://github.com/RimSort/RimSort/releases/latest]RimSort[/url] to sort your mods
 [/list] 
 
-[url=https://steamcommunity.com/sharedfiles/filedetails/changelog/2375479881][img]https://img.shields.io/github/v/release/emipa606/XNDCarpenterTables?label=latest%20version&amp;style=plastic&amp;color=9f1111&amp;labelColor=black[/img][/url] | tags:  crafting,  workbench</description>
-  <modVersion IgnoreIfNoMatchingField="True">1.6.0</modVersion>
+[url=https://steamcommunity.com/sharedfiles/filedetails/changelog/2375479881][img]https://img.shields.io/github/v/release/emipa606/XNDCarpenterTables?label=latest%20version&amp;style=plastic&amp;color=9f1111&amp;labelColor=black[/img][/url] | tags: workbench, crafting</description>
+  <modVersion IgnoreIfNoMatchingField="True">1.6.1</modVersion>
 </ModMetaData>
