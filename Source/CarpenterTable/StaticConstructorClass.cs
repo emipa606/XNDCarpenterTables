@@ -156,12 +156,9 @@ public static class StaticConstructorClass
                 continue;
             }
 
-            foreach (var tag in faction.recipePrerequisiteTags)
+            foreach (var tag in faction.recipePrerequisiteTags.Where(tag => !resultList.Contains(tag)))
             {
-                if (!resultList.Contains(tag))
-                {
-                    resultList.Add(tag);
-                }
+                resultList.Add(tag);
             }
         }
 
